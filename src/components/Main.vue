@@ -106,6 +106,7 @@ export default {
         color:#FFFFFF;
     }
     #City {
+        width: fit-content;
         font-size: 23pt;
         margin-top: 5vh;
         border:none;
