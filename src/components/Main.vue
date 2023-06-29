@@ -127,8 +127,8 @@ export default {
     #Search {
         border:none;
         background: transparent;
-        height: 5vh;
-        width:5vh;
+        height:fit-content;
+        width:fit-content;
         margin-top: 5vh;
         padding:0;
         margin-left:5vw;
@@ -165,5 +165,17 @@ export default {
         display:flex;
         flex-direction: row-reverse;
         justify-content: center;
+    }
+    @media (max-width:800px) {
+        #City {
+            font-size:14pt;
+            
+        }
+        h1 {
+            font-size: 30pt;
+        }
+        #State {
+            font-size: 14pt;
+        }
     }
 </style>
