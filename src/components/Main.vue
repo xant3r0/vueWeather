@@ -135,6 +135,7 @@ export default {
         display:flex;
         flex-direction: column;
         align-items: center;
+        width: 40vw;
     }
     #frig {
         background: rgb(2,0,36);
