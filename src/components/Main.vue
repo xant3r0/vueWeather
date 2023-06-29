@@ -106,7 +106,7 @@ export default {
         color:#FFFFFF;
     }
     #City {
-        width: 30vw;
+        width: 100%;
         font-size: 23pt;
         margin-top: 5vh;
         border:none;
@@ -131,6 +131,7 @@ export default {
         width:5vh;
         margin-top: 5vh;
         padding:0;
+        margin-left:5vw;
     }
     #data {
         display:flex;
