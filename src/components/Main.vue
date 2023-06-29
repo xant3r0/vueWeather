@@ -9,6 +9,7 @@
                 <h1>{{ currentTemp }} °</h1>
                 <p id="State">{{ currentState }}</p>
             </div>
+            <div class="gol"></div>
         </div>
         <div id="frig" v-else-if="currentState === Mist">
             <button @click="getData" id="Search" for="City">
@@ -19,6 +20,7 @@
                 <h1>{{ currentTemp }} °</h1>
                 <p id="State">{{ currentState }}</p>
             </div>
+            <div class="gol"></div>
         </div>
         <div id="zero" v-else-if="currentTemp === 0">
             <button @click="getData" id="Search" for="City">
@@ -29,6 +31,7 @@
                 <h1>{{ currentTemp }} °</h1>
                 <p id="State">{{ currentState }}</p>
             </div>
+            <div class="gol"></div>
         </div>
         <div id="subzero" v-else-if="currentTemp < 0">
             <button @click="getData" id="Search" for="City">
@@ -39,6 +42,7 @@
                 <h1>{{ currentTemp }} °</h1>
                 <p id="State">{{ currentState }}</p>
             </div>
+            <div class="gol"></div>
         </div>
         <div id="frig" v-else="">
             <button @click="getData" id="Search" for="City">
@@ -49,6 +53,7 @@
                 <h1>{{ currentTemp }} °</h1>
                 <p id="State">{{ currentState }}</p>
             </div>
+            <div class="gol"></div>
         </div>
     </div>
 </template>
@@ -128,7 +133,7 @@ export default {
         border:none;
         background: transparent;
         height:fit-content;
-        width:fit-content;
+        width:5vw;
         margin-top: 5vh;
         padding:0;
         margin-left:5vw;
@@ -166,7 +171,22 @@ export default {
         flex-direction: row-reverse;
         justify-content: center;
     }
-    @media (max-width:800px) {
+    .gol {
+        min-width: 10vh;
+    }
+    @media (max-width:750px) {
+        #City {
+            font-size:17pt;
+            
+        }
+        h1 {
+            font-size: 56pt;
+        }
+        #State {
+            font-size: 17pt;
+        }
+    }
+    @media (max-width:400px) {
         #City {
             font-size:14pt;
             
