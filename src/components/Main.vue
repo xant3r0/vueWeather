@@ -172,7 +172,7 @@ export default {
         justify-content: center;
     }
     .gol {
-        min-width: 10vh;
+        min-width: 10vw;
     }
     @media (max-width:750px) {
         #City {
