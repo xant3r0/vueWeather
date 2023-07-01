@@ -1,5 +1,5 @@
 <template>
-    <div id="main">
+    <div id="current">
         <div id="norm" v-if="clouds < 30 && currentTemp > 18 && currentState !== 'Mist'">
             <button @click="getData" id="Search" for="City">
                 <img v-bind:src="require('../assets/Search.png')" alt="">
@@ -56,6 +56,17 @@
             <div class="gol"></div>
         </div>
     </div>
+    <div id="forecast-data">
+        <h2>Today</h2>
+        <h4>{{ currentCity }}</h4>
+    </div>
+    <div id="forecast">
+        <div v-for="temp in hourlyData" class="forecast">
+            <p>{{ temp }} °</p>
+            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <p>Negru</p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -68,7 +79,12 @@ export default {
             currentCity:'',
             currentInputCity:'',
             placeholder:'Enter a city',
-            clouds:0
+            clouds:0,
+            data:{
+
+            },
+            hourlyData:[],
+
         }
     },
     methods: {
@@ -78,11 +94,16 @@ export default {
                 this.currentTemp = test.data.current.feelslike_c;
                 this.currentState = test.data.current.condition.text;
                 this.currentCity = test.data.location.name;
-                console.log(test);
+                this.data = test;
+                for(let i = 0;i <= 4;i++) {
+                    this.hourlyData[i] = this.data.data.forecast.forecastday[0].hour[i].feelslike_c;
+                }
+                console.log(this.data);
             } catch(e) {
             };
         }
     }
+    //this.data.data.forecast.forecastday[0].hour[0].feelslike_c
 }
 </script>
 
@@ -106,7 +127,7 @@ export default {
         color:#FFFFFF;
     }
     #State {
-        margin-top:10vh;
+        margin-top:1vh;
         font-size: 23pt;
         color:#FFFFFF;
     }
@@ -197,5 +218,46 @@ export default {
         #State {
             font-size: 14pt;
         }
+    }
+    #barier {
+        min-height: 15vh;
+    }
+    #forecast {
+        max-height:50vh;
+        overflow-x:auto;
+        overflow-y: hidden;
+        display:flex;
+        max-width:100vw;
+        margin-left:5vw;
+        margin-right:5vw;
+        margin-top:3vh;
+    }
+    .forecast {
+        height:20vh;
+        min-width:17vw;
+        line-height: 10vh;
+        border-radius: 20px;
+        display:inline;
+        text-align:center;
+        background: rgb(2,0,36);
+        margin-left:1vw;
+        background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(241,67,97,1) 0%, rgba(238,190,85,1) 100%);
+    }
+    h2 {
+        align-self: flex-start;
+        margin-top:10vh;
+        margin-left:5vw;
+    }
+    #forecast p {
+        line-height: 5vh;
+    }
+    #forecast-data {
+        display:flex;
+        min-width: 90vw;
+        justify-content: space-between;
+    }
+    #forecast-data h4 {
+        margin-top:10vh;
+        margin-right: 5vw;
     }
 </style>
