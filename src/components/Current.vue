@@ -61,10 +61,30 @@
         <h4>{{ currentCity }}</h4>
     </div>
     <div id="forecast">
-        <div v-for="temp in hourlyData" class="forecast">
-            <p>{{ temp }} °</p>
+        <div  class="forecast">
+            <p>{{ hourlyData[0] }} °</p>
             <img v-bind:src="require('../assets/Tuman.png')" alt="">
-            <p>Negru</p>
+            <p>{{ hoursForecast[0] }}:00</p>
+        </div>
+        <div  class="forecast">
+            <p>{{ hourlyData[1] }} °</p>
+            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <p>{{ hoursForecast[1] }}:00</p>
+        </div>
+        <div  class="forecast">
+            <p>{{ hourlyData[2] }} °</p>
+            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <p>{{ hoursForecast[2] }}:00</p>
+        </div>
+        <div  class="forecast">
+            <p>{{ hourlyData[3] }} °</p>
+            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <p>{{ hoursForecast[3] }}:00</p>
+        </div>
+        <div  class="forecast">
+            <p>{{ hourlyData[4] }} °</p>
+            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <p>{{ hoursForecast[4] }}:00</p>
         </div>
     </div>
 </template>
@@ -84,12 +104,19 @@ export default {
 
             },
             hourlyData:[],
+            hoursForecast:[],
+            lastUpdated:"",
+            param:"",
+            isPM:false,
+            convH:0
+
 
         }
     },
     methods: {
         async getData() {
             try {
+                this.convH = 0
                 const test = await axios.get('http://api.weatherapi.com/v1/forecast.json?key=386ff44423524ec89a2114131232806&q=' + this.currentInputCity + '&days=1&aqi=no&alerts=no');
                 this.currentTemp = test.data.current.feelslike_c;
                 this.currentState = test.data.current.condition.text;
@@ -98,8 +125,57 @@ export default {
                 for(let i = 0;i <= 4;i++) {
                     this.hourlyData[i] = this.data.data.forecast.forecastday[0].hour[i].feelslike_c;
                 }
-                console.log(this.data);
+                this.lastUpdated = this.data.data.current.last_updated;
+                let i = 0;
+                while(this.lastUpdated[i] !== " ") {
+                    i++;
+                }
+                this.lastUpdated = this.lastUpdated.substring(i);
+                this.param = this.lastUpdated[1] + this.lastUpdated[2];
+                //console.log(this.param);
+                if(this.lastUpdated[4] === 3) {
+                    convH = convH + 1;
+                }
+
+            switch(this.param) {
+                case "01":this.convH = this.convH + 1;break;
+                case "02":this.convH = this.convH + 2;break;
+                case "03":this.convH = this.convH + 3;break;
+                case "04":this.convH = this.convH + 4;break;
+                case "05":this.convH = this.convH + 5;break;
+                case "06":this.convH = this.convH + 6;break;
+                case "07":this.convH = this.convH + 7;break;
+                case "08":this.convH = this.convH + 8;break;
+                case "09":this.convH = this.convH + 9;break;
+                case "10":this.convH = this.convH + 10;break;
+                case "11":this.convH = this.convH + 11;break;
+                case "12":this.convH = this.convH + 12;break;
+                case "13":this.convH = this.convH + 13;break;
+                case "14":this.convH = this.convH + 14;break;
+                case "15":this.convH = this.convH + 15;break;
+                case "16":this.convH = this.convH + 16;break;
+                case "17":this.convH = this.convH + 17;break;
+                case "18":this.convH = this.convH + 18;break;
+                case "19":this.convH = this.convH + 19;break;
+                case "20":this.convH = this.convH + 20;break;
+                case "21":this.convH = this.convH + 21;break;
+                case "22":this.convH = this.convH + 22;break;
+                case "23":this.convH = this.convH + 23;break;
+                case "24":this.convH = this.convH + 24;break;
+            
+            };
+            for(let i = 0;i <= 4;i++) {
+                this.convH = this.convH + 1;
+                if(this.convH < 25) {
+                    this.hoursForecast[i] = this.convH;
+                }else{
+                    this.convH = 1;
+                    this.hoursForecast[i] = this.convH;
+                }
+            };
+
             } catch(e) {
+
             };
         }
     }
