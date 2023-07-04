@@ -347,9 +347,10 @@ export default {
         border-radius: 20px;
         display:inline;
         text-align:center;
-        background: rgb(2,0,36);
+        /*background: rgb(2,0,36);*/
         margin-left:1vw;
-        background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(241,67,97,1) 0%, rgba(238,190,85,1) 100%);
+        border:2px solid #000000;
+        /*background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(241,67,97,1) 0%, rgba(238,190,85,1) 100%);*/
     }
     h2 {
         align-self: flex-start;
