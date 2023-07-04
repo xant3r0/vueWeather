@@ -1,9 +1,20 @@
 <template>
+<div v-if="isResponse !== true" id="start">
+    <h1 id="title">Weather App</h1>
+    <p id="desc">Our weather app is a comprehensive and user-friendly tool that keeps you informed about current and forecasted weather conditions. It provides real-time updates on temperature, precipitation, wind speed, and more, all displayed in an intuitive interface. With personalized location-based forecasts, interactive maps, and customizable notifications, our app ensures you're prepared for any weather situation. Download it today for a smarter way to stay connected to the ever-changing skies.</p>
+    <div id="container">
+        <button @click="getData" id="Search" for="City">
+            <img v-bind:src="require('../assets/Search.png')" alt="">
+        </button>
+        <input id="City" type="text" v-model="currentInputCity" :placeholder="placeholder">
+    </div>
+</div>
+<div v-if="isResponse === true">
     <div id="current">
         <div id="norm" v-if="clouds < 30 && currentTemp > 18 && currentState !== 'Mist'">
             <button @click="getData" id="Search" for="City">
-                <img v-bind:src="require('../assets/Search.png')" alt="">
-            </button> 
+            <img v-bind:src="require('../assets/Search.png')" alt="">
+        </button>
             <div id="data">
                 <input id="City" type="text" v-model="currentInputCity" :placeholder="placeholder"> 
                 <h1 v-if="isResponse === true">{{ currentTemp }} °</h1>
@@ -56,6 +67,7 @@
             <div class="gol"></div>
         </div>
     </div>
+</div>
     <div v-if="isResponse === true">
         <div id="forecast-data">
             <h2>Today</h2>
@@ -73,8 +85,8 @@
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Light drizzle'">
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Light rain shower'">
                 <img v-bind:src="require('../assets/HeavyRain.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Thundery outbreaks possible'">
-                <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Moderate or heavy rain shower'">
-                <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Mist'">
+                <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Moderate or heavy rain shower'">            
+                <img v-bind:src="require('../assets/Cloudy.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Overcast' || data.data.forecast.forecastday[0].hour[0].condition.text === 'Cloudy'">
                 <p>{{ hoursForecast[0] }}:00</p>
             </div>
                 <div  class="forecast">
@@ -90,6 +102,7 @@
                     <img v-bind:src="require('../assets/HeavyRain.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[1].condition.text === 'Thundery outbreaks possible'">
                     <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[1].condition.text === 'Moderate or heavy rain shower'">
                     <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[1].condition.text === 'Mist'">
+                    <img v-bind:src="require('../assets/Cloudy.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Overcast' || data.data.forecast.forecastday[0].hour[1].condition.text === 'Cloudy'">
                     <p>{{ hoursForecast[1] }}:00</p>
             </div>
             <div  class="forecast">
@@ -105,6 +118,7 @@
                     <img v-bind:src="require('../assets/HeavyRain.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[2].condition.text === 'Thundery outbreaks possible'">
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[2].condition.text === 'Moderate or heavy rain shower'">
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[2].condition.text === 'Mist'">
+                <img v-bind:src="require('../assets/Cloudy.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Overcast' || data.data.forecast.forecastday[0].hour[2].condition.text === 'Cloudy'">
                     <p>{{ hoursForecast[2] }}:00</p>
             </div>
             <div  class="forecast">
@@ -120,6 +134,7 @@
                     <img v-bind:src="require('../assets/HeavyRain.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[3].condition.text === 'Thundery outbreaks possible'">
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[3].condition.text === 'Moderate or heavy rain shower'">
                 <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[3].condition.text === 'Mist'">
+                <img v-bind:src="require('../assets/Cloudy.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Overcast' || data.data.forecast.forecastday[0].hour[3].condition.text === 'Cloudy'">
                     <p>{{ hoursForecast[3] }}:00</p>
             </div>
             <div  class="forecast">
@@ -135,6 +150,7 @@
                     <img v-bind:src="require('../assets/HeavyRain.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[4].condition.text === 'Thundery outbreaks possible'">
                     <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[4].condition.text === 'Moderate or heavy rain shower'">
                     <img v-bind:src="require('../assets/RainySun.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[4].condition.text === 'Mist'">
+                    <img v-bind:src="require('../assets/Cloudy.png')" v-else-if="isResponse === true && data.data.forecast.forecastday[0].hour[0].condition.text === 'Overcast' || data.data.forecast.forecastday[0].hour[4].condition.text === 'Cloudy'">
                     <p>{{ hoursForecast[4] }}:00</p>
             </div>
         </div>
@@ -393,5 +409,45 @@ export default {
     }
     #first {
         margin-left:0;
+    }
+    #start {
+        min-height: 100vh;
+        min-width: 100vw;
+        background: url(../assets/Background.png);
+        background-size: cover;
+        top:0;
+        position: fixed;
+    }
+    #container {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
+    #Search {
+        margin-right:5vw;
+    }
+    #Search::placeholder {
+        color:darkcyan;
+    }
+    #desc {
+        color:#FFFFFF;
+        text-align: center;
+        padding: 0 20vw;
+        padding-top: 10vh;
+    }
+    @media (max-width:520px) {
+        #desc {
+            padding:0 10vw;
+            padding-top: 10vh;
+        }
+    }
+    #City {
+        margin-left: 5vw;
+    }
+    #title {
+        color:#FFFFFF;
+        text-align: center;
+        padding: 0 20vw;
+        font-size: 25pt;
     }
 </style>
