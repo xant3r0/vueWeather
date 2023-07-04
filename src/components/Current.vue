@@ -63,27 +63,27 @@
     <div id="forecast">
         <div  class="forecast">
             <p>{{ hourlyData[0] }} °</p>
-            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <img v-bind:src="require('../assets/Cloudy.png')" alt="">
             <p>{{ hoursForecast[0] }}:00</p>
         </div>
         <div  class="forecast">
             <p>{{ hourlyData[1] }} °</p>
-            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <img v-bind:src="require('../assets/Cloudy.png')" alt="">
             <p>{{ hoursForecast[1] }}:00</p>
         </div>
         <div  class="forecast">
             <p>{{ hourlyData[2] }} °</p>
-            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <img v-bind:src="require('../assets/Cloudy.png')" alt="">
             <p>{{ hoursForecast[2] }}:00</p>
         </div>
         <div  class="forecast">
             <p>{{ hourlyData[3] }} °</p>
-            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <img v-bind:src="require('../assets/Cloudy.png')" alt="">
             <p>{{ hoursForecast[3] }}:00</p>
         </div>
         <div  class="forecast">
             <p>{{ hourlyData[4] }} °</p>
-            <img v-bind:src="require('../assets/Tuman.png')" alt="">
+            <img v-bind:src="require('../assets/Cloudy.png')" alt="">
             <p>{{ hoursForecast[4] }}:00</p>
         </div>
     </div>
